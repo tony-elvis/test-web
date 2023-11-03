@@ -1,3 +1,3 @@
 window.env = {
-  "BACKEND_URL": "https://api-dev.goerrand.com"
+  BACKEND_URL: 'http://localhost:3001'
 };
