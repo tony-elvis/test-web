@@ -9,7 +9,7 @@ import TextInput from '../../../components/TextInput';
 import { axiosInstance } from '../../../utils/axiosInstance';
 import capitalizeFirstLetter from '../../../utils/capitalizeFL';
 import { passwordMatchPatternError } from '../../../utils/validatePassword';
-import ErrandBackground from '../../../components/layouts/ErrandBackground';
+import AppBackground from '../../../components/layouts/AppBackground';
 
 const ResetPasswordPage = () => {
   let navigate = useNavigate();
@@ -111,7 +111,7 @@ const ResetPasswordPage = () => {
   return (
     <Fragment>
       <div className="grid min-h-screen grid-cols-2">
-        <ErrandBackground />
+        <AppBackground />
         <div className="flex items-center justify-center min-h-full col-span-2 px-4 py-12 sm:col-span-1 sm:px-6 lg:px-8">
           <div className="w-full p-12 space-y-8 shadow-xl sm:max-w-md rounded-xl">
             {!codeIsSent && !validCode ? (

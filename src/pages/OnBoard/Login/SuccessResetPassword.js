@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { AiFillCheckCircle } from 'react-icons/ai';
-import ErrandBackground from '../../../components/layouts/ErrandBackground';
+import AppBackground from '../../../components/layouts/AppBackground';
 
 export const SuccessResetPassword = () => {
   return (
     <Fragment>
       <div className="grid min-h-screen grid-cols-2">
-        <ErrandBackground />
+        <AppBackground />
         <div className="flex items-center justify-center min-h-full col-span-1 px-4 py-12 sm:px-6 lg:px-8">
           <div className="w-full max-w-md p-12 space-y-8 shadow-xl rounded-xl">
             <div className="flex flex-col items-center justify-center">

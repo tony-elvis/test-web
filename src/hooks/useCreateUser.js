@@ -37,7 +37,6 @@ export const useCreateUser = () => {
       .get(`/users/byId/${id}`)
       .then((res) => {
         const { data } = res.data;
-        console.log('333333', data);
         setValue('firstName', data?.firstName ?? '');
         setValue('lastName', data?.lastName ?? '');
         setValue('email', data?.email ?? '');

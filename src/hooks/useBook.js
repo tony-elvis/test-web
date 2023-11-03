@@ -48,7 +48,6 @@ export const useBook = () => {
   }, []);
 
   useEffect(() => {
-    console.log('entro a book');
     if (book.length > 0) {
       changeTableProps({ ...tableProps, data: book });
     }
@@ -162,7 +161,6 @@ export const useBook = () => {
   };
 
   const onDelete = (ids) => {
-    console.log('delete', ids);
     axiosInstance
       .delete(`books/book/delete/${ids[0]}`)
       .then((res) => {

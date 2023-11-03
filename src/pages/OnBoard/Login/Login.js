@@ -7,7 +7,8 @@ import TextInput from '../../../components/TextInput';
 import { AiFillEye } from 'react-icons/ai';
 import { axiosInstance } from '../../../utils/axiosInstance';
 import capitalizeFirstLetter from '../../../utils/capitalizeFL';
-import ErrandBackground from '../../../components/layouts/ErrandBackground';
+import AppBackground from '../../../components/layouts/AppBackground';
+
 import { useAuthStore } from '../../../store/useAuthStore';
 
 const LoginPage = () => {
@@ -63,7 +64,7 @@ const LoginPage = () => {
   return (
     <Fragment>
       <div className="grid min-h-screen grid-cols-2">
-        <ErrandBackground />
+        <AppBackground />
         <div className="flex items-center justify-center min-h-full col-span-2 px-4 py-12 sm:col-span-1 sm:px-6 lg:px-8">
           <div className="w-full p-12 space-y-8 shadow-xl sm:max-w-md rounded-xl">
             <div>

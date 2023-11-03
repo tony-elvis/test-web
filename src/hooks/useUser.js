@@ -166,7 +166,6 @@ export const useUser = () => {
   };
 
   const onDelete = (ids) => {
-    console.log('delete', ids);
     axiosInstance
       .delete(`users/delete/${ids[0]}`)
       .then((res) => {

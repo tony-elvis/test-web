@@ -8,7 +8,6 @@ const SidebarLayout = () => {
   const navigate = useNavigate();
   const { logout, user } = useAuthStore();
   const [loading, setLoading] = useState(false);
-  console.log('jjjjjjj', user);
   // let height = window.innerHeight;
   let menuList;
   if (user?.role === 'Librarian') {

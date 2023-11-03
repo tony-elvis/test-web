@@ -59,7 +59,6 @@ export const useCreateBook = () => {
 
   const onSubmitHandler = async (data) => {
     try {
-      console.log('dataaaaaa', data);
       let res;
       if (id) {
         res = await axiosInstance.put(`books/book/update/${id}`, {
@@ -81,7 +80,6 @@ export const useCreateBook = () => {
       if (id) {
         updateUser(res.data.data);
       } else {
-        console.log('first', res);
         addUser(res.data.data);
       }
       toast(res.data.message, {
