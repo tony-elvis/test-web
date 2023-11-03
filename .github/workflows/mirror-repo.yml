@@ -1,0 +1,20 @@
+name: Mirror repository
+
+on:
+  push:
+    branches:
+      - develop
+      - qa
+      - staging
+      - main
+      - master
+
+jobs:
+  mirror-repo:
+    name: Mirror repo
+    uses: Focus-ITO/devops_reusable-workflows/.github/workflows/mirror-repo-to-gitlab-client-account.yml@main
+    with:
+      gitlab_repo_client: ${{ vars.GITLAB_REPO_CLIENT }}
+    secrets:
+      gitlab_token_user_client: ${{ secrets.GITLAB_TOKEN_USER_CLIENT }}
+      gitlab_personal_token_client: ${{ secrets.GITLAB_PERSONAL_TOKEN_CLIENT }}
