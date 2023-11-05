@@ -24,7 +24,7 @@ export const unSelectAll = () => {
 };
 
 export const useBook = () => {
-  const { setUser, book, removeUser } = useBookStore();
+  const { setUser, book, removeUser, changeStatus } = useBookStore();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [multipleSelection, setMultipleSelection] = useState(false);
   const [idsSelected, setIdsSelected] = useState([]);
@@ -171,6 +171,7 @@ export const useBook = () => {
         setModalIsOpen(false);
         onDispatch(unSelectAll());
         setIdsSelected([]);
+        getUsers();
       })
       .catch((error) => {
         toast(error?.response?.data?.message ?? 'Something went wrong', {
@@ -179,13 +180,52 @@ export const useBook = () => {
       });
   };
 
-  const disableOrEnable = (ids, isActive) => {
+  const setBooked = (ids) => {
     axiosInstance
-      .put('coupon/update-status', { ids, isActive })
+      .delete(`books/book/delete/${ids[0]}`)
       .then((res) => {
         toast(res.data.message, {
           type: 'success'
         });
+        removeUser(ids);
+        setModalIsOpen(false);
+        onDispatch(unSelectAll());
+        setIdsSelected([]);
+      })
+      .catch((error) => {
+        toast(error?.response?.data?.message ?? 'Something went wrong', {
+          type: 'error'
+        });
+      });
+  };
+
+  const disableOrEnable = (ids, userId) => {
+    axiosInstance
+      .post('books/book', { bookId: ids[0], id: userId })
+      .then((res) => {
+        toast(res.data.message, {
+          type: 'success'
+        });
+        changeStatus(ids, true);
+        setModalIsOpen(false);
+        setIdsSelected([]);
+        onDispatch(unSelectAll());
+      })
+      .catch((error) => {
+        toast(error?.response?.data?.message ?? 'Something went wrong', {
+          type: 'error'
+        });
+      });
+  };
+
+  const deleteBooked = (ids) => {
+    axiosInstance
+      .post('books/delete', { bookId: ids[0] })
+      .then((res) => {
+        toast(res.data.message, {
+          type: 'success'
+        });
+        changeStatus(ids, false);
         setModalIsOpen(false);
         setIdsSelected([]);
         onDispatch(unSelectAll());
@@ -223,7 +263,9 @@ export const useBook = () => {
       setIdsSelected,
       onDelete,
       disableOrEnable,
-      onDispatch
+      onDispatch,
+      setBooked,
+      deleteBooked
     }
   };
 };

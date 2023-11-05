@@ -21,10 +21,12 @@ const Books = () => {
       setMultipleSelection,
       setIdsSelected,
       disableOrEnable,
+      deleteBooked,
       onDispatch
     }
   } = useBook();
   const { user } = useAuthStore();
+  console.log(user);
   const PageSizeSelector = ({ pageSize, pageSizes, dispatch }) => (
     <div className="flex flex-row items-center">
       <h3>Items per page:</h3>
@@ -51,6 +53,14 @@ const Books = () => {
       setModalIsOpen(true);
     } else if (value === 'edit' && user.role === 'Librarian') {
       navigate(`edit/${rowData._id}`);
+    } else if (value === 'setBook') {
+      setIdsSelected([rowData._id]);
+      setCategory('setBook');
+      setModalIsOpen(true);
+    } else if (value === 'setAvailable' && user.role === 'Librarian') {
+      setIdsSelected([rowData._id]);
+      setCategory('setAvailable');
+      setModalIsOpen(true);
     }
   };
 
@@ -72,10 +82,14 @@ const Books = () => {
           <option key={3} value={'delete'}>
             Delete
           </option>
+          <option key={5} value={'setAvailable'}>
+            Set available
+          </option>
         </>
       ) : null}
-      <option key={4} value={'book'}>
-        Book
+
+      <option key={4} value={'setBook'}>
+        set book
       </option>
     </select>
   );
@@ -208,12 +222,14 @@ const Books = () => {
           setModalIsOpen={setModalIsOpen}
           type={type}
           onAccept={() => {
-            if (category === 'delete') {
+            if (category === 'delete' && user.role === 'Librarian') {
               onDelete(idsSelected);
-            } else if (category === 'disable') {
+            } else if (category === 'disable' && user.role === 'Librarian') {
               disableOrEnable(idsSelected, false);
-            } else if (category === 'enable') {
-              disableOrEnable(idsSelected, true);
+            } else if (category === 'setBook') {
+              disableOrEnable(idsSelected, user.id);
+            } else if (category === 'setAvailable' && user.role === 'Librarian') {
+              deleteBooked(idsSelected);
             }
           }}
           category={category}

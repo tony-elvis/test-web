@@ -13,6 +13,19 @@ export const useBookStore = create((set) => ({
       book: [...state.book, book]
     }));
   },
+  changeStatus: (ids, status) => {
+    set((state) => ({
+      book: state.book.map((item) => {
+        if (ids.includes(item._id)) {
+          return {
+            ...item,
+            status: status
+          };
+        }
+        return item;
+      })
+    }));
+  },
   updateUser: (book) => {
     set((state) => ({
       book: state.book.map((item) => {
